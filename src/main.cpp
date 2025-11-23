@@ -5,6 +5,9 @@
 #include <vector>
 #include <list>
 
+#include "game.hpp"
+#include "gamestate.hpp"
+ 
 
 typedef struct Projectile {
     Vector3 position;
@@ -21,7 +24,7 @@ int main() {
     // Fenster erstellen
     InitWindow(screenWidth, screenHeight, "Mein erstes Raylib-Spiel");
 
-    DisableCursor(); // Mauszeiger deaktivieren
+    /*DisableCursor(); // Mauszeiger deaktivieren
 
     Camera3D camera = { 0 };
     camera.fovy = 45.0f;
@@ -64,15 +67,23 @@ int main() {
     float shootCooldown = 0.0f;
     const float SHOOT_RATE = 0.2f; // Zeit zwischen den Schüssen in Sekunden
 
+    */
     SetTargetFPS(60); // Ziel-FPS setzen
 
+    //MainMenueState * game_ptr;
 
-
+     Game game(new MainMenueState());
 
 
     // Haupt-Game-Loop
     while (!WindowShouldClose()) {
 
+        game.Update();
+
+        BeginDrawing();
+        game.Draw();
+        EndDrawing();
+        /*
         float dt = GetFrameTime();
 
         Vector2 mouseDelta = GetMouseDelta();
@@ -163,10 +174,11 @@ int main() {
 
 
 
-
+        
         BeginDrawing();
         ClearBackground(SKYBLUE);
 
+        
         BeginMode3D(camera);
         DrawModelWires(terrainModel, (Vector3){0,0,0}, 1.0f, DARKGRAY); // Terrain zeichnen
         DrawModel(terrainModel, (Vector3){0,0,0}, 1.0f, WHITE); // Terrain zeichnen
@@ -188,17 +200,18 @@ int main() {
         DrawGrid(100, 10.0f);
         EndMode3D();
 
+        
         DrawText("Spaceship Demo -W,A,S,D, Mouse, LMB to Shoot", 10, 10, 20, LIGHTGRAY);
-        DrawText(TextFormat("Ship Position: [%.2f, %.2f, %.2f]", shipPosition.x, shipPosition.y, shipPosition.z), 10, 25, 20, LIGHTGRAY);
-        DrawText(TextFormat("Projectiles: %d", (int)projectiles.size()), 10, 40, 20, LIGHTGRAY);
-        DrawText(TextFormat("Ship Yaw: %.2f Pitch: %.2f", shipYaw, shipPitch), 10, 70, 20, LIGHTGRAY);
+        //DrawText(TextFormat("Ship Position: [%.2f, %.2f, %.2f]", shipPosition.x, shipPosition.y, shipPosition.z), 10, 25, 20, LIGHTGRAY);
+        //DrawText(TextFormat("Projectiles: %d", (int)projectiles.size()), 10, 40, 20, LIGHTGRAY);
+        //DrawText(TextFormat("Ship Yaw: %.2f Pitch: %.2f", shipYaw, shipPitch), 10, 70, 20, LIGHTGRAY);
         DrawText(TextFormat("FPS: %d", GetFPS()), 10, 55, 20, LIGHTGRAY);
 
-        EndDrawing();
+        EndDrawing();*/
     }
 
-    UnloadModel(terrainModel); // Modell entladen
-    UnloadModel(shipModel);    // Modell entladen
+    //UnloadModel(terrainModel); // Modell entladen
+    //UnloadModel(shipModel);    // Modell entladen
     //if you loaded any other resources, unload them here Unloadtexture(yourTexture), UnloadSound(yourSound),
     //ClodeAudioDevice etc.
 
